@@ -18,6 +18,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Home from '@material-ui/icons/Home';
 import { Link } from 'react-router-dom';
 import '../styles/homepage.css';
+const env = require('../env_config');
 
 
 
@@ -39,7 +40,7 @@ class HomePageComponent extends React.Component{
         })
       },
       (err) => { console.log('err hello')
-      window.location.assign('http://localhost:5000/#/')}, //no localhost
+      window.location.assign(`http://localhost:${process.env.HPORT}/#/`)}, //no localhost
       (complete) => { }
       )
   }

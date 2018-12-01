@@ -7,19 +7,19 @@ import './styles/App.css';
 class App extends Component {
 
   //remove test function if not in use
-  test() {
-    const url = "https://github.com/ishawakankar/test2.git";
-    fetch(`/deploy`, {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
-      body: url
-    })
-      .then(res => { return res.json() })
-      .then(res => console.log(res))
-  }
+  // test() {
+  //   const url = "https://github.com/ishawakankar/test2.git";
+  //   fetch(`/deploy`, {
+  //     method: 'POST',
+  //     headers: {
+  //       'Accept': 'application/json',
+  //       "Content-Type": "application/x-www-form-urlencoded"
+  //     },
+  //     body: url
+  //   })
+  //     .then(res => { return res.json() })
+  //     .then(res => console.log(res))
+  // }
 
   render() {
     return (

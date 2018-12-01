@@ -1,6 +1,5 @@
 /* eslint no-underscore-dangle:0 */
 
-
 const passport = require('passport');
 const GitlabStrategy = require('passport-gitlab2').Strategy;
 const env = require('./env_config');
@@ -23,9 +22,9 @@ passport.deserializeUser((profile, done) => {
 });
 
 passport.use(new GitlabStrategy({
-  clientID: '67b69135517ceafbf994278feb4705eaf9ba385b41e07901d8cb4bf3678340f7',
-  clientSecret: 'b919cedd1e8bb45d1666180658070de60f6086ba8d0d871d18329a29caa6a063',
-  callbackURL: 'http://localhost:5000/auth/gitlab',
+  clientID: '597dc387087612354f380e76c4d6ce12c8ec7a1a34866df20366be0cafb8e50a',
+  clientSecret: '3fe1a5163594512a06b839139d1e49e1eb0b2162f75f9b74c58575b89baef655',
+  callbackURL: `http://localhost:${process.env.HPORT}/auth/gitlab`,
 },
 
 ((token, tokenSecret, profile, done) => {

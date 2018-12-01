@@ -1,6 +1,6 @@
 FROM node:8
 WORKDIR /usr/src/app
-
+VOLUME /usr/src/data
 COPY package*.json ./
 RUN npm install
 COPY ./ ./

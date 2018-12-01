@@ -30,9 +30,10 @@ const passportSetup = require('./passport');
 const authRouter = require('./routes/authentication');
 const appModel = require('./db/models/apps');
 const hook = require('./webhook');
+const yaml = require('yamljs')
 
 
-app.use(express.static(path.join(__dirname, './client/build')));
+app.use(express.static(path.join(__dirname, './build')));
 app.use(express.static(path.join(__dirname, './logs')));
 
 // app.use(expressWinston.logger({
@@ -68,7 +69,7 @@ app.use(passport.session());
 app.use('/auth', authRouter);
 
 const server = app.listen(port, () => {
-  console.log(`listening on port 5000 for app${config.get('rxjs.app')}`);
+  console.log(`listening on port ${process.env.HPORT} for app${config.get('rxjs.app')}`);
 });
 
 const io = sockets(server);
@@ -105,11 +106,13 @@ app.post('/deploy', (req, res) => {
   const zipped = zip(url, repoName);
 
   const emission = zipped.pipe(concatMap((data) => {
-    const command = spawn('./script2.sh', [data[0], data[1]]);
+    console.log('INSIDE EMISSION ************')
+    const command = spawn('./script.sh', [data[0], data[1]]);
     repoUrl = data[0];
     repo = data[1];
     const stdout = fromEvent(command.stdout, 'data');
     const stderr = fromEvent(command.stderr, 'data');
+    console.error("standard error.......................",command.stderr);
     return merge(stdout, stderr).pipe(map(dataOld => dataOld.toString('utf-8')));
   }));
 
@@ -169,7 +172,7 @@ app.post('/deploy', (req, res) => {
 
   res.json({ status: 'ok' });
   
-  hook(req.body.collector.username, req.body.collector.password, repo);
+  // hook(req.body.collector.username, req.body.collector.password, repo);
 
   // if (req.body.collector.username !== '' && 
   //     req.body.collector.password !== '' && 
